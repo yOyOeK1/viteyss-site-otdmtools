@@ -1,0 +1,17 @@
+{
+    "oName": "c_otdmtoolsPage",
+    "o": null,
+    "dir": "viteyss-site-otdmtools",
+    "asModule": true,
+    "asVite": true,
+    "asPlugin": true,
+    "jssrc":["c_otdmtoolsPage.js"],
+    "modsrc":["m_otdmtools.js"],
+    "enable": true,
+    "author": "Bartłomiej Ceglik <yoyoek@wp.pl>",
+    "ver": "0.0.1",
+    "desc": "Test of viteyss-site- plugin system Hello World!",
+    "otdm":{
+        "playground": false
+    }
+}
