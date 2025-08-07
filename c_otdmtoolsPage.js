@@ -46,6 +46,7 @@ class c_otdmtoolsPage{
     -->
     <a href="javascript:ottO.newTask({'q':'sum/1/2/.raw'}).then((r)=>{ $('#ottRes').html('<pre>'+JSON.stringify(r, null, 2)+'</pre>'); });">sum tasker</a> 
     
+    
     <div id="ottRes" style="
     width: 100vw;
       min-height:50%;
