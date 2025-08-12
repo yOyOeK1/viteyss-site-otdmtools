@@ -13,10 +13,10 @@ import formidable from 'formidable';
  * looks for `q` value in headers
  * 
  * #### use example:
- * 
+ * ```bash
  * curl -x POST http://localhost:8080/apis/ott -d 'q=exeIt/{"v":"1"}'  | jq .
  * curl -x POST http://localhost:8080/apis/ott -d 'q=sum/3/2'  | jq .
- * 
+ * ```
  * 
  */
 
