@@ -47,7 +47,7 @@ class serverOtt{
             maxFileSize: 5 * 1024 * 1024, // 5MB limit 
         });
         let [fields, files] = await form.parse(req);
-        this.cl([`   field   `,fields,"\n\nfiles\n",files]);
+        //this.cl([`   field   `,fields,"\n\nfiles\n",files]);
         
         if( this.ottO == undefined ){
             for( let mod of this.server.modulesSrc){

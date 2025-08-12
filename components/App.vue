@@ -16,6 +16,11 @@ by tasker (ottO):<br>
   <a @click="setCurrent(item[1], true)" :key="index">{{ item[0] }}</a>
 </div><br>
 
+by POST (/apis/ott):<br>
+<div class="ottoptions"v-for="( item, index ) in cmdList">
+  <a @click="setCurrentPOST(item[1], true)" :key="index">{{ item[0] }}</a>
+</div><br>
+
 
 
 </template>
@@ -55,6 +60,30 @@ export default {
     return { msgTest, cmdList };
   },
   methods:{
+
+    setCurrentPOST( cmd, byTasker ){
+      console.log('execPOST on ott cmd '+cmd+` using tasker: ${byTasker}`);
+      var fd = new FormData();
+      fd.append('abcFromApp','is ok?');
+      fd.append('q',cmd);
+      fetch('/apis/ott',{
+        method: 'POST',
+        body: fd
+      }).then(response=>{
+        if (!response.ok) {
+              throw new Error('Network response was not ok ' + response.statusText);
+        }
+        return response.json();
+      }).then( data =>{
+          $('#ottRes').html(`<pre>from vue by POST\n\n`+
+            JSON.stringify(data,null,2)+`\n\n
+            </pre>`);
+     
+      });
+
+    },
+
+
     setCurrent( cmd, byTasker ){
       console.log('exec on ott cmd '+cmd+` using tasker: ${byTasker}`);
       
