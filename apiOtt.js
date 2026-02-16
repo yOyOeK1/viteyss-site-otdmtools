@@ -1,6 +1,7 @@
 
 import path from 'path'
 import formidable from 'formidable';
+import { otdmTools } from 'nodeotdmtools';
 
 
 
@@ -60,18 +61,39 @@ class serverOtt{
 
 
         }
-        
+
+               
         if( fields.q && fields.q.length == 1 ){
             let q = fields.q[0];
 
-            this.ottO.doTask( `${q}` ).then((r)=>{
-                let j = JSON.parse(r);
-                tr = {
-                    'q': q,
-                    'res':j
-                };
-                res.end( JSON.stringify(tr) );
-            });
+            
+            if( `${req.url}`.endsWith('/newT') ){
+                console.log('apiOtt req: ',req.url);
+                res.write('#ott_newT START\n');
+                /*let cu = 0;
+                let i = setInterval(()=> res.write(`cu:${cu++}\n`) ,100);
+                setTimeout(()=>{
+                    clearInterval( i );
+                    res.end('ott -> newT DONE');
+                },5000);
+                */
+
+                let ottN = new otdmTools(1,1);
+                ottN.sendQ( q );
+
+                res.end('#ott_newT DONE');
+                return 0;
+
+            }else{                
+                this.ottO.doTask( `${q}` ).then((r)=>{
+                    let j = JSON.parse(r);
+                    tr = {
+                        'q': q,
+                        'res':j
+                    };
+                    res.end( JSON.stringify(tr) );
+                });
+            }
         
         }else{
                 res.end( JSON.stringify({"error":1,"msg":"No `q` value in fields."}) );
@@ -85,7 +107,7 @@ class serverOtt{
     handleRequest( args ){
         let {req, res, server } = args;
 
-        if( req.method == 'POST' && req.url == this.url ){
+        if( req.method == 'POST' && req.url.startsWith( this.url ) ){
             this.cl('in middle ....');
             this.server = server;
             return this.doIt( req,res );
